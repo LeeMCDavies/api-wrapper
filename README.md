@@ -2,11 +2,11 @@
 
 Simple package to help generate a API wrapper.
 
-###Installation
+### Installation
 
 composer require pecyn/api-wrapper
 
-###Usage
+### Usage
 
 Create a class to represent your api.
 ```
