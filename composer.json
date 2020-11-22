@@ -1,13 +1,14 @@
 {
-    "name": "lmsdavies/api-wrapper",
+    "name": "pecyn/api-wrapper",
     "description": "Api wrapper",
+    "keywords": ["api", "wrapper", "guzzle"],
+    "license": "MIT",
     "authors": [
         {
             "name": "Lee Davies",
             "email": "lee@lmcdavies.co.uk"
         }
     ],
-    "license": "proprietary",
     "require": {
         "php": "^7.3",
         "guzzlehttp/guzzle": "^7.0.1"

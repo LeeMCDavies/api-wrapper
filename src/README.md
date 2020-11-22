@@ -8,30 +8,28 @@ composer require pecyn/api-wrapper
 
 ###Usage
 
-Create class to represent your api.
+Create a class to represent your api.
 ```
 <?php
 
-namespace Api\EndPoints\Users;
+namespace App\EndPoints;
 
-use Psr\Http\Message\ResponseInterface;
 use Pecyn\ApiWrapper\EndPoint;
-use Api\Models\User
 
-class UsersGetEndPoint extends EndPoint
+class CatsGetEndPoint extends EndPoint
 {
     protected $method = 'GET';
-    protected $uri = 'http//api.com/users';
-    
-    public function __construct(int $userId)
+    protected $uri = 'https://cat-fact.herokuapp.com/facts';
+
+    public function __construct(string $id)
     {
-        $this->uri = $this->uri . '/' . $userId;
+        $this->uri .= '/' . $id;
     }
 
-    public function processResponse(ResponseInterface $response)
+    public function processResponse(\Psr\Http\Message\ResponseInterface $response)
     {
         if ($response->getStatusCode() == 200) {
-            return User::fromJson($response->getBody());
+            return $response->getBody();
         }
     }
 }
@@ -42,14 +40,15 @@ Create an api instance
 
 use Pecyn\ApiWrapper\Api;
 
-$api = new Api(['end_point_namespaces' => ['EndPoints\\Users']]);
+$api = new \Pecyn\ApiWrapper\Api(['end_point_namespaces' => ['App\EndPoints']]);
 //or
-$api = new Api()->setEndPointNameSpaces(['EndPoints\\Users']);
+$api = new \Pecyn\ApiWrapper\Api();
+$api->setEndPointNameSpaces(['App\EndPoints']);
 //or extend the Api class.
 //class MyApi Extends Api{
 //
-//protected $endPointNameSpaces = ['EndPoints\\Users'];
+//protected $endPointNameSpaces = ['App\EndPoints'];
 //      
 
-$user = $api->users->get(9);
+$facts = $api->cats->get('591d9b2f227c1a0020d26823');
 ```
